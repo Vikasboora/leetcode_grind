@@ -1,7 +1,5 @@
 let str = 'abcabcbb';
 
-// abcabcbb
-// bbbb
 function allSubString(s) {
   let result = [];
   for (let i = 0; i < s.length; i++) {
@@ -30,22 +28,17 @@ function uniqueSubStrint(s) {
 // uniqueSubStrint(str);
 
 function solution1(s) {
-  let set = new Set();
-  let max = 0;
-  for (let i = 0; i < s.length; i++) {
-    let str = '';
-    for (let j = i; j < s.length; j++) {
-      str = str + s[j];
-      set.add(str);
+  let obj = {};
+  let maxLength = 0;
+  let left = 0;
+  for (let right = 0; right < s.length; right++) {
+    if (obj[s[right]] !== undefined && obj[s[right]] >= left) {
+      left = obj[s[right]] + 1;
     }
+    obj[s[right]] = right;
+    maxLength = Math.max(maxLength, right - left + 1);
   }
-  let arr = [...set];
-  for (let i = 0;i < arr.length;i++){
-    if (arr[i].length > max) {
-      max = arr[i].length;
-    }
-  }
-  console.log(max)
+  return maxLength;
 }
 
-solution1(str);
+console.log(solution1(str));
