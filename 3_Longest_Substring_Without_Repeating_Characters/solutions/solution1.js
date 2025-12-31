@@ -32,10 +32,11 @@ function solution1(s) {
   let maxLength = 0;
   let left = 0;
   for (let right = 0; right < s.length; right++) {
-    if (obj[s[right]] !== undefined && obj[s[right]] >= left) {
-      left = obj[s[right]] + 1;
+    let char = s[right];
+    if (obj[char] !== undefined && obj[char] >= left) {
+      left = obj[char] + 1;
     }
-    obj[s[right]] = right;
+    obj[char] = right;
     maxLength = Math.max(maxLength, right - left + 1);
   }
   return maxLength;
